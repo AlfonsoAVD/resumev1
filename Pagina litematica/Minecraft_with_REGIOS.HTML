@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MINECRAFT BEDROCK</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #0b1220;
+        color: #e6f0f2;
+        font-family: 'Press Start 2P', monospace;
+        overflow: hidden;
+      }
+      h1 {
+        text-align: center;
+        font-size: 28px;
+        margin-top: 20px;
+        position: relative;
+        z-index: 1;
+      }
+      img.logo {
+        width: 300px;
+        height: auto;
+        border-radius: 50%;
+        border: 6px solid #ffd700;
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        position: relative;
+        z-index: 1;
+      }
+      .button-container {
+        margin-top: 30px;
+        padding: 20px;
+        background-color: #ffd70020;
+        border-radius: 15px;
+        display: flex;
+        gap: 15px;
+        position: relative;
+        z-index: 1;
+      }
+      .btn {
+        padding: 10px 20px;
+        background-color: #1e90ff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 12px;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        transition: background-color 0.3s;
+      }
+      .btn:hover {
+        background-color: #187bcd;
+      }
+      canvas#particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+      }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <canvas id="particles"></canvas>
+    <img src="logo.jpg" alt="Logo" class="logo">
+    <h1>MINECRAFT BEDROCK</h1>
+    <div class="button-container">
+      <button class="btn">TUTORIALES</button>
+      <a href="granjas.html" class="btn" style="text-align:center; line-height: 1.8; display: inline-block;">GRANJAS</a>
+      <button class="btn">DECORACIONES</button>
+    </div>
+
+    <div style="margin-top: 40px; display: flex; justify-content: center; z-index:1;">
+      <a href="https://www.tiktok.com/@regios.1765" target="_blank" 
+         style="display: flex; align-items: center; gap: 8px; background: #000; padding: 10px 16px; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.8); text-decoration: none; color: white; font-weight: bold; font-family: 'Press Start 2P', monospace;">
+        <svg width="24" height="24" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 0 2px #25F4EE);">
+          <path d="M204.5 63.995C192.15 63.995 180.88 61.04 171.23 55.74V151.57C171.23 163.12 163.21 172.98 150.96 172.98C139.72 172.98 131.66 164.46 131.66 152.67C131.66 140.95 139.72 132.34 150.96 132.34C153.67 132.34 156.25 132.84 158.57 133.87V99.425C150.35 93.65 140.21 89.55 129.04 87.43V187.3C129.04 205.75 113.14 219.72 93.95 219.72C74.77 219.72 58.87 205.75 58.87 187.3C58.87 168.85 74.77 154.89 93.95 154.89C97.61 154.89 101.11 155.75 104.41 157.29V69.62C95.97 63.36 85.67 60.01 75 60.01C33.72 60.01 0 93.7 0 134.84C0 176.13 33.72 209.82 75 209.82C116.33 209.82 150.96 176.13 150.96 134.84V126.68C164.75 133.25 182.21 137.5 204.5 137.5V63.995Z" fill="#25F4EE"/>
+        </svg>
+        TikTok
+      </a>
+    </div>
+
+    <script>
+      const canvas = document.getElementById('particles');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const particles = [];
+      for (let i = 0; i < 100; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 3 + 1,
+          speedX: (Math.random() - 0.5) * 1,
+          speedY: (Math.random() - 0.5) * 1,
+          color: `hsl(${Math.random() * 60 + 40}, 100%, 70%)`
+        });
+      }
+
+      function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          p.x += p.speedX;
+          p.y += p.speedY;
+          if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+          if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+          ctx.fillStyle = p.color;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+        });
+        requestAnimationFrame(animateParticles);
+      }
+      animateParticles();
+    </script>
+  </body>
+</html>
+
